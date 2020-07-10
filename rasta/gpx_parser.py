@@ -14,6 +14,9 @@ import geopandas
 import numpy as np
 
 class GpxParser():
+    """Class to parse XML based GPS data recordings in gpx format. 
+    Additionally, helper function allows postprocessing the data.
+    """
     def __init__(self, gpx_file_name, calculate_distance = True):
         self.gpx_file_name = gpx_file_name
         self.R = 6371 # Radius of Earth in km
