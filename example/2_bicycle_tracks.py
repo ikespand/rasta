@@ -15,15 +15,20 @@ import geopandas
 from gpx_parser import GpxParser
 # %%
 # Load the gpx file
-gpx_instance = GpxParser("dmrc.gpx",
+gpx_instance = GpxParser("BicyleRoute-July2020.gpx",
                          calculate_distance=True)
 df = gpx_instance.data
 
 # %% Further calculation
-# Convert our point data to a line data
+total_time = (df.iloc[-1, 3]-df.iloc[0, 3]).seconds/3600  # in hours
 total_dist = df["distance"].sum()
-route_osm = LineString(geopandas.points_from_xy(x=df.lon, y=df.lat))
+average_speed = total_dist/total_time
 
+# average_speed_pandas = df["avg_speed"].mean()
+
+# Average speed of pandas and
+# Convert our point data to a line data
+route_osm = LineString(geopandas.points_from_xy(x=df.lon, y=df.lat))
 # %% Visualize with Kepler
 # Kepler needs time as string, otherwise it will throw an error
 df["time"] = df["time"].apply(str)

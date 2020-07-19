@@ -7,6 +7,7 @@ Created on Thu Jul  9 21:32:52 2020
 """
 import sys
 
+# Either add kepler_cli/rasta to your path or install.
 sys.path.append( '../../keplergl_cli/' )
 sys.path.append( '../rasta/' )
 

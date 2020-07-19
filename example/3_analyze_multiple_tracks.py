@@ -13,9 +13,10 @@ from shapely.geometry import LineString
 import geopandas
 from gpx_parser import GpxParser
 # %%
+gpx_folder = "/tracks"
+gpx_fname = "BicyleRoute-July2020.gpx"
 # Load the gpx file
-gpx_instance = GpxParser("BicyleRoute-July2020.gpx",
-                         calculate_distance=True)
+gpx_instance = GpxParser(gpx_fname,calculate_distance=True)
 df = gpx_instance.data
 
 # %% Further calculation
@@ -30,11 +31,14 @@ average_speed = total_dist/total_time
 route_osm = LineString(geopandas.points_from_xy(x=df.lon, y=df.lat))
 
 # %% Visualize with Kepler
-# Kepler needs time as string, otherwise it will throw an error
+# Kepler needs time as string, otherwise it will throw an error base
+df["time"] = df["time"].apply(str)
+
+fname = os.path.splitext(os.path.basename(gpx_fname))[0]
 
 vis = Visualize(api_key=MAPBOX_API_KEY,
                 config_file="keplergl_config.json",
-                output_map=os.getcwd())
+                output_map=os.getcwd()+"/"+fname)
 
 vis.add_data(data=df, names='point data')
 vis.add_data(data=route_osm, names='line string')
