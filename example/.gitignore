@@ -2,3 +2,7 @@
 *.html
 __pycache__
 settings.py
+api
+*.csv
+*.json
+tbd.py

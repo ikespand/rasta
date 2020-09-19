@@ -1,11 +1,11 @@
 # rasta
 
-Rasta (rāstā) is a python based library specifically design to handle gpx dataset. 
+Rasta (rāstā) is a Python based library specifically design to handle gpx dataset. 
 
 ## Features
 
--   Parse XML gps routes easily and get data in pandas df in single line of code
--   get the distance of consecutive coordinates
+-   Parse XML gps routes easily and get data in pandas df in a single line of code
+-   Get the distance of consecutive coordinates and perform calculation of speed (if timestamp is available)
 -   Postprocessing data for average speed, total distance
 -   Integration with kepler gl allows the creation of interactive map with nice visualization
 

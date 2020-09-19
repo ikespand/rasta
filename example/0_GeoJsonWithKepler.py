@@ -7,21 +7,19 @@ of Kepler.
 
 @author: ikespand
 """
+import os
 from settings import *
 from keplergl_cli.keplergl_cli import Visualize
-import os
 import geopandas as gpd
-
-#%%
-fname = "IITDelhi_roadnetwork.geojson"
+# %% Geopandas can parse geojson
+fname = "../tracks/IITDelhi_roadnetwork.geojson"
 geodf = gpd.read_file(fname)
 # %% Visualize with Kepler
-# Kepler needs time as string, otherwise it will throw an error
-
 vis = Visualize(api_key=MAPBOX_API_KEY,
                 config_file="keplergl_config.json",
-                output_map="IITDelhi_roads")
-
+                output_map="../tracks/IITDelhi_roads")
+# Add the data to Visualize
 vis.add_data(data=geodf, names='IITD and surroundings')
+# Save the output map and do not open it
 html_path = vis.render(open_browser=False,
-                       read_only=False)
+                       read_only=True)

@@ -6,17 +6,20 @@ doesn't have the timestamp information. So, we cannot find the speed.
 
 @author: ikespand
 """
-
+import os
 from settings import *
 from keplergl_cli.keplergl_cli import Visualize
-import os
 from shapely.geometry import LineString
 import geopandas
 from gpx_parser import GpxParser
+
 # %%
 # Load the gpx file
-gpx_instance = GpxParser("BicyleRoute-July2020.gpx",
+gpx_fname = "../tracks/BicyleRoute-July2020.gpx"
+
+gpx_instance = GpxParser(gpx_fname,
                          calculate_distance=True)
+# Extract our data in dataframe (df)
 df = gpx_instance.data
 
 # %% Further calculation
@@ -33,10 +36,18 @@ route_osm = LineString(geopandas.points_from_xy(x=df.lon, y=df.lat))
 # Kepler needs time as string, otherwise it will throw an error
 df["time"] = df["time"].apply(str)
 
+fname = os.path.splitext(os.path.basename(gpx_fname))[0]
+
 vis = Visualize(api_key=MAPBOX_API_KEY,
                 config_file="keplergl_config.json",
-                output_map=os.getcwd())
+                output_map="../tracks/"+fname)
 
 vis.add_data(data=df, names='point data')
 vis.add_data(data=route_osm, names='line string')
 html_path = vis.render(open_browser=False, read_only=False)
+
+#%%
+
+vis.map
+with open('hex_config.py', 'w') as f:
+   f.write('config = {}'.format(vis.map))
