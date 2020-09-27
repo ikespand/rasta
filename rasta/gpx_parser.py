@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jul  4 22:53:36 2020
-
+A generalise class for Gpx data. 
 @author: ikespand
 """
 
