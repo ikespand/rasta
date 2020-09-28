@@ -1,5 +1,7 @@
 """
 Copyright (C) 2020 Kratrim Labs - All Rights Reserved.
+
+To use this, wrap `4_here_maps.py` into a function first.
 """
 import flask
 from flask import request, jsonify, render_template
@@ -8,6 +10,7 @@ import pandas as pd
 from here_nav_api import find_route
 import requests
 
+# %%
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
