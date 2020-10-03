@@ -16,15 +16,14 @@ import numpy as np
 from shapely.geometry import Point, LineString
 from itertools import groupby
 from process_geo_data import ProcessGeoData
+
 # Install local version of keplergl_cli by:
 # pip install git+https://github.com/ikespand/keplergl_cli
-
-from keplergl_cli.keplergl_cli import Visualize
 
 # %% Get data from HERE
 
 
-class GetHereRoute():
+class GetHereRoute:
     """Navigation with HERE maps. More info about the API:
         https://developer.here.com/documentation/routing-api/8.8.0/dev_guide/topics/use-cases/calculate-route.html
     """
@@ -32,12 +31,21 @@ class GetHereRoute():
     def __init__(self, start_coord, end_coord, HERE_API_KEY, departure=None):
         self.src = start_coord
         self.tgt = end_coord
-        self.here_api_key = "?apiKey="+HERE_API_KEY
-        self.base_address = "https://route.ls.hereapi.com/routing/7.2/calculateroute.json"
+        self.here_api_key = "?apiKey=" + HERE_API_KEY
+        self.base_address = (
+            "https://route.ls.hereapi.com/routing/7.2/calculateroute.json"
+        )
         # Below options can be extended easily. For now, we don't need it.
         self.options = "&departure=now&mode=fastest;publicTransport&combineChange=true"
-        self.request_address = self.base_address+self.here_api_key + \
-            "&waypoint0=geo!"+self.src+"&waypoint1=geo!"+self.tgt+self.options
+        self.request_address = (
+            self.base_address
+            + self.here_api_key
+            + "&waypoint0=geo!"
+            + self.src
+            + "&waypoint1=geo!"
+            + self.tgt
+            + self.options
+        )
         self.json_data = self.get_data_from_here()
         self.nav_data_df = self.json_to_df()
 
@@ -75,26 +83,32 @@ class GetHereRoute():
         gdf_nav = []
         pt = []
         for k in range(0, len(self.nav_data_df)):
-            pt.append((self.nav_data_df.loc[k].longitude,
-                       self.nav_data_df.loc[k].latitude))
+            pt.append(
+                (self.nav_data_df.loc[k].longitude, self.nav_data_df.loc[k].latitude)
+            )
 
             if k != 0:
-                __gdf = gpd.GeoDataFrame(self.nav_data_df.loc[[k]],
-                                         crs="EPSG:4326",
-                                         geometry=[LineString([Point(pt[k-1]),
-                                                               Point(pt[k])])])
+                __gdf = gpd.GeoDataFrame(
+                    self.nav_data_df.loc[[k]],
+                    crs="EPSG:4326",
+                    geometry=[LineString([Point(pt[k - 1]), Point(pt[k])])],
+                )
             else:
-                __gdf = gpd.GeoDataFrame(self.nav_data_df.loc[[k]],
-                                         geometry=[Point(pt[k])])
+                __gdf = gpd.GeoDataFrame(
+                    self.nav_data_df.loc[[k]], geometry=[Point(pt[k])]
+                )
 
             gdf_nav.append(__gdf)
         gdf_nav = pd.concat(gdf_nav)
         return gdf_nav
 
+
 # %% Main program to demonstrate the usage
 
 
 if __name__ == "__main__":
+    from keplergl_cli.keplergl_cli import Visualize
+
     start_coord = "12.874132,77.661479"  # Should come from the request
     end_coord = "12.877664,77.665843"  # Should come from the request
 
@@ -111,10 +125,9 @@ if __name__ == "__main__":
 
     # Visualize with Kepler
 
-    vis = Visualize(api_key=MAPBOX_API_KEY,
-                    output_map="Here-Route-Kepler")
+    vis = Visualize(api_key=MAPBOX_API_KEY, output_map="Here-Route-Kepler")
     # Add the data to Visualize
-    vis.add_data(data=gdf, names='Here-Route')
+    vis.add_data(data=gdf, names="Here-Route")
 
     # Save the output map and do not open it
     html_path = vis.render(open_browser=False, read_only=False)

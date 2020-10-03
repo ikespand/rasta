@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-This example demonstrate the usage of `rasta` for a gpx route which has timestamp
-information in it. 
+A simple example to demonstrate the usage of gpx parser in rasta which doesn't
+have the timestamp.
 
 @author: ikespand
 """
@@ -15,8 +15,7 @@ from gpx_parser import GpxParser
 
 # %%
 # Load the gpx file
-gpx_instance = GpxParser("dmrc.gpx",
-                         calculate_distance=True)
+gpx_instance = GpxParser("dmrc.gpx", calculate_distance=True)
 # Extract the data
 df = gpx_instance.data
 
@@ -28,11 +27,10 @@ total_dist = df["distance"].sum()
 route_osm = LineString(geopandas.points_from_xy(x=df.lon, y=df.lat))
 
 # %% Visualize with Kepler
-vis = Visualize(api_key=MAPBOX_API_KEY,
-                config_file="keplergl_config.json",
-                output_map=os.getcwd())
+vis = Visualize(
+    api_key=MAPBOX_API_KEY, config_file="keplergl_config.json", output_map=os.getcwd()
+)
 
-vis.add_data(data=df, names='point data')
-vis.add_data(data=route_osm, names='line string')
-html_path = vis.render(open_browser=False,
-                       read_only=False)
+vis.add_data(data=df, names="point data")
+vis.add_data(data=route_osm, names="line string")
+html_path = vis.render(open_browser=False, read_only=False)

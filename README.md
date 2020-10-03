@@ -14,11 +14,12 @@ Rasta (rāstā) is a Python based library specifically design to handle gpx data
 **Mapbox API key**: To use kepler gl integration, user will need to provide a Mapbox API key. Go to [Mapbox.com](https://account.mapbox.com/access-tokens)
 to get an API key.
 
-This package has dependencies on `geojson`, `shapely`, `geopandas`, `gpx` and `kepler_cli`.
+This package has dependencies on `geojson`, `shapely`, `geopandas`, `gpx` and `kepler_cli`. For `kepler_cli`
 
 ```
 conda install geojson shapely geopandas -c conda-forge
-pip install keplergl_cli gpx kepler_cli
+pip install gpx 
+pip install git+https://github.com/ikespand/keplergl_cli
 ```
 
 ## Usage
