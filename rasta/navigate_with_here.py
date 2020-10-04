@@ -1,8 +1,8 @@
 """
-This script usage the HERE MAPS API to determine the fastest public transit 
+This script usage the HERE MAPS API to determine the fastest public transit
 route.
-
-This will act as rest api which will return geojson data for (upto) 3 available options.
+This will act as rest api which will return geojson data for (upto) 3 available
+options.
 
 @author: ikespand
 """
@@ -25,7 +25,7 @@ from process_geo_data import ProcessGeoData
 
 class GetHereRoute:
     """Navigation with HERE maps. More info about the API:
-        https://developer.here.com/documentation/routing-api/8.8.0/dev_guide/topics/use-cases/calculate-route.html
+    https://developer.here.com/documentation/routing-api/8.8.0/dev_guide/topics/use-cases/calculate-route.html
     """
 
     def __init__(self, start_coord, end_coord, HERE_API_KEY, departure=None):
@@ -36,7 +36,9 @@ class GetHereRoute:
             "https://route.ls.hereapi.com/routing/7.2/calculateroute.json"
         )
         # Below options can be extended easily. For now, we don't need it.
-        self.options = "&departure=now&mode=fastest;publicTransport&combineChange=true"
+        self.options = (
+            "&departure=now&mode=fastest;publicTransport&combineChange=true"
+        )
         self.request_address = (
             self.base_address
             + self.here_api_key
@@ -84,7 +86,10 @@ class GetHereRoute:
         pt = []
         for k in range(0, len(self.nav_data_df)):
             pt.append(
-                (self.nav_data_df.loc[k].longitude, self.nav_data_df.loc[k].latitude)
+                (
+                    self.nav_data_df.loc[k].longitude,
+                    self.nav_data_df.loc[k].latitude,
+                )
             )
 
             if k != 0:

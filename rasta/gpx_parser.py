@@ -23,7 +23,9 @@ class GpxParser:
             self.EARTH_RADIUS = 6371  # Radius of Earth in km
             # self.data["distance"] = 0.0
             # self.get_distance_from_df()
-            self.data["distance"] = ProcessGeoData.get_distance_from_df(self.data)
+            self.data["distance"] = ProcessGeoData.get_distance_from_df(
+                self.data
+            )
             if not self.data["time"].isnull().values.any():
                 self.data["speed"] = 0.0
                 self.get_speed()
@@ -37,7 +39,9 @@ class GpxParser:
         self.gpx = gpxpy.parse(self.gpx_file)
         # Extract the data
         self.data = self.gpx.tracks[0].segments[0].points
-        self.df = pd.DataFrame(columns=["longitude", "latitude", "altitude", "time"])
+        self.df = pd.DataFrame(
+            columns=["longitude", "latitude", "altitude", "time"]
+        )
         for point in self.data:
             self.df = self.df.append(
                 {

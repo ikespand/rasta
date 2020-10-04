@@ -7,7 +7,6 @@
 """
 import pandas as pd
 import zipfile
-import os
 from keplergl_cli.keplergl_cli import Visualize
 from shapely.geometry import Point, LineString
 import geopandas as gpd
@@ -16,8 +15,7 @@ import geopandas as gpd
 
 
 class Gtfs:
-    """GTFS feed parser and visualizer. 
-    """
+    """GTFS feed parser and visualizer."""
 
     def __init__(self, zip_file):
         self.fname = zip_file
@@ -26,8 +24,8 @@ class Gtfs:
         self.read_required_files()
 
     def check_required_files(self):
-        """GTFS protocol has certain files which are compulsory and this function
-        checks for the same.
+        """GTFS protocol has certain files which are compulsory and this
+        function checks for the same.
         """
         required_files = [
             "agency.txt",
@@ -42,23 +40,23 @@ class Gtfs:
             print("Error. Required files are not available. Exiting..")
 
     def read_required_files(self):
-        """Function to read FEW of the required files of GTFS
-        """
+        """Function to read FEW of the required files of GTFS"""
         self.stops = pd.read_csv(self.zf.open("stops.txt"))
         self.routes = pd.read_csv(self.zf.open("routes.txt"))
         self.trips = pd.read_csv(self.zf.open("trips.txt"))
 
     def visualize_route(self, MAPBOX_API_KEY, output_map=None):
-        """Function to enable a visualization
-        """
-        if output_map == None:
+        """Function to enable a visualization"""
+        if output_map is None:
             self.output_map = "map_from_kepler"
         else:
             self.output_map = output_map
         if not ("shapes.txt" in self.zf.namelist()):
             print("Shape file is not present!")
             # self.visualize_stops(MAPBOX_API_KEY)
-            Gtfs.visualizer({"stops": self.stops}, MAPBOX_API_KEY, self.output_map)
+            Gtfs.visualizer(
+                {"stops": self.stops}, MAPBOX_API_KEY, self.output_map
+            )
         else:
             print("Shape file is present, processing...")
             self.process_shapes(MAPBOX_API_KEY)
@@ -97,14 +95,17 @@ class Gtfs:
                 route = route.reset_index(drop=True)
                 # zip the coordinates into shapely points and convert to gdf
                 geometry = [
-                    Point(xy) for xy in zip(shape.shape_pt_lon, shape.shape_pt_lat)
+                    Point(xy)
+                    for xy in zip(shape.shape_pt_lon, shape.shape_pt_lat)
                 ]
                 __df = pd.DataFrame()
                 __df.loc[0, "shape_id"] = shape_id
                 # Concat the route info to the shape for tooltip in map
                 __df1 = pd.concat([__df, route], axis=1)
                 # Append for each route
-                geo_df.append(gpd.GeoDataFrame(__df1, geometry=[LineString(geometry)]))
+                geo_df.append(
+                    gpd.GeoDataFrame(__df1, geometry=[LineString(geometry)])
+                )
             self.shape_route = pd.concat(geo_df)
             # self.visualize_routes(shape_route, MAPBOX_API_KEY)
 
