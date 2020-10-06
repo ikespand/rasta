@@ -7,11 +7,11 @@ have the timestamp.
 @author: ikespand
 """
 import os
-from settings import *
+from settings import MAPBOX_API_KEY
 from keplergl_cli.keplergl_cli import Visualize
 from shapely.geometry import LineString
 import geopandas
-from gpx_parser import GpxParser
+from gpx import GpxParser
 
 # %%
 # Load the gpx file
@@ -28,7 +28,9 @@ route_osm = LineString(geopandas.points_from_xy(x=df.lon, y=df.lat))
 
 # %% Visualize with Kepler
 vis = Visualize(
-    api_key=MAPBOX_API_KEY, config_file="keplergl_config.json", output_map=os.getcwd()
+    api_key=MAPBOX_API_KEY,
+    config_file="keplergl_config.json",
+    output_map=os.getcwd(),
 )
 
 vis.add_data(data=df, names="point data")

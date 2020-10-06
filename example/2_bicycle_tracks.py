@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-This example show the usage with a recorded track from mobile. It has the 
+This example show the usage with a recorded track from mobile. It has the
 timestamp information. So, we can also find the speed.
 
 @author: ikespand
 """
 import os
-from settings import *
+from settings import MAPBOX_API_KEY
 from keplergl_cli.keplergl_cli import Visualize
 from shapely.geometry import LineString
 import geopandas
-from gpx_parser import GpxParser
+from gpx import GpxParser
 
 # %%
 # Load the gpx file
