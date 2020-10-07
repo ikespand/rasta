@@ -48,7 +48,7 @@ class Gtfs:
     def visualize_route(self, MAPBOX_API_KEY, output_map=None):
         """Function to enable a visualization"""
         if output_map is None:
-            self.output_map = "map_from_kepler"
+            self.output_map = "Unknown_"
         else:
             self.output_map = output_map
         if not ("shapes.txt" in self.zf.namelist()):
@@ -111,3 +111,19 @@ class Gtfs:
 
             data = {"stops": self.stops, "shape": self.shape_route}
             Gtfs.visualizer(data, MAPBOX_API_KEY, self.output_map)
+
+    def export_route(self, exported_fname="Unkown_gtfs"):
+        self.shape_route.to_file(exported_fname + ".geojson", driver="GeoJSON")
+
+
+# %%
+
+if __name__ == "__main__":
+    # Import MAPBOX_API. Otherwise, paste it here directly
+    from settings import MAPBOX_API_KEY
+
+    my_gtfs = Gtfs("../tracks/GTFS_delhi.zip")
+    # To use the visulization, user must have a mapbox api key
+    # this is free and can be created by going to their website
+    my_gtfs.visualize_route(MAPBOX_API_KEY, "Delhi_gtfs_")
+    my_gtfs.export_route("Delhi_gtfs")
