@@ -23,12 +23,14 @@ class GetOtpRoute:
         self,
         start_coord,
         end_coord,
+        mode="TRANSIT,WALK",
         viz=True,
         MAPBOX_API_KEY=None,
         output_map_path="navigation_with_otp",
     ):
         self.src = start_coord
         self.tgt = end_coord
+        self.mode = mode
         self.base_address = "http://localhost:8080/otp/routers/default"
         self.get_routes()
         self.mapbox_api_key = MAPBOX_API_KEY
@@ -43,6 +45,8 @@ class GetOtpRoute:
             + self.src
             + "&toPlace="
             + self.tgt
+            + "&mode="
+            + self.mode
         )
 
     def get_routes(self):
@@ -69,7 +73,7 @@ class GetOtpRoute:
             itinerary = self.response_json["plan"]["itineraries"][i]
             vis, df = GetOtpRoute.plot_itinerary(vis, itinerary, i)
             gdf.append(df)
-        html_path = vis.render(open_browser=False, read_only=True)
+        html_path = vis.render(open_browser=False, read_only=False)
         return gdf, html_path
 
     @staticmethod
