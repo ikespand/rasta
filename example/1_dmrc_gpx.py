@@ -22,5 +22,3 @@ map_location = gpx_instance.visualize_route(
 
 # Further calculations
 total_dist = df["distance"].sum()
-if not df["time"].isnull().values.any():
-    average_speed_pandas = df["avg_speed"].mean()

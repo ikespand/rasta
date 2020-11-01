@@ -1,4 +1,7 @@
 """
+Rasta has a module to postprocess data for navigation coming from the REST API
+of OpenTrip Planner (https://ikespand.github.io/posts/OpenTripPlanner/).
+
 Just for reference:
 # APIKEY= "Bearer a559433c8d2d91b2329f24457b6dc122"
 # address = "https://api.deutschebahn.com/flinkster-api-ng/v1/bookingproposals?lat=48.780816&lon=9.201172&radius=2000&limit=4&providernetwork=2"
@@ -12,6 +15,7 @@ Just for reference:
 from settings import MAPBOX_API_KEY
 from navigate_with_otp import GetOtpRoute
 import pandas as pd
+import numpy as np
 
 # %%
 my_otp_nav = GetOtpRoute(
@@ -31,7 +35,6 @@ ite1 = gdf[0]
 ite1 = ite1.reset_index(drop=True)
 bus = ite1.loc[[1]]
 
-import numpy as np
 
 pt = np.array(bus.geometry.values[0].coords)
 time = 40

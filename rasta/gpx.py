@@ -34,6 +34,7 @@ class GpxParser:
                 self.data["speed"] = 0.0
                 self.get_speed()
                 self.data.iloc[:, 5] = self.data.iloc[:, 5].replace(np.inf, 0)
+
             else:
                 print("No timestamps -> Skipping speed calculation..")
 
@@ -83,6 +84,10 @@ class GpxParser:
         read_only=False,
         config_file=None,
     ):
+        # Kepler.gl doesn't work properly if timestamp is not string
+        if not self.data["time"].isnull().values.any():
+            self.data["time"] = self.data["time"].apply(str)
+
         """Visualize the GPX route with kepler_cli"""
         gpx_visualize = Visualize(
             api_key=mapbox_api_key,
@@ -96,4 +101,4 @@ class GpxParser:
         html_path = gpx_visualize.render(
             open_browser=open_browser, read_only=read_only
         )
-        return html_path
+        return html_path, gpx_visualize
