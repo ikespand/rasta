@@ -1,6 +1,6 @@
 # rasta
 
-Rasta (rāstā) is a Python based library specifically design to handle gpx dataset. 
+Rasta (rāstā) is a Python based library specifically design to handle gps tracks. Currently, one can use to parse/process/visualize GPX, GTFS, GEOJSON data. In addition, there are modules to use HERE map or OpenTripPlanner's REST API for the navigation. 
 
 ## Features
 
@@ -8,6 +8,7 @@ Rasta (rāstā) is a Python based library specifically design to handle gpx data
 - Parse GTFS feed and visualize the network [Coming: GTFS validator]
 -   Get the distance of consecutive coordinates and perform calculation of speed (if timestamp is available)
 -   Integration with kepler gl allows the creation of interactive map with nice visualization
+-  Navigate with HERE or OTP with using their respective APIs.
 
 ## Install
 

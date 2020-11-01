@@ -37,9 +37,9 @@ Feedbacks are always welcome.
 Get Started!
 ------------
 
-Ready to contribute? Here's how to set up `kepler_quickvis` for local development.
+Ready to contribute? Here's how to set up `rasta` for local development.
 
-1. Fork the `kepler_quickvis` repo on GitHub.
+1. Fork the `rasta` repo on GitHub.
 2. Clone your fork locally::
 
     $ git clone git@github.com:your_name_here/rasta.git
