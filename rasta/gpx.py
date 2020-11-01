@@ -1,14 +1,18 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-A generalise class for Gpx data.
+A generalise class for GPX data.
 @author: ikespand
 """
 
 import gpxpy
 import pandas as pd
+import geopandas
 import numpy as np
 from process_geo_data import ProcessGeoData
+from keplergl_cli.keplergl_cli import Visualize
+from shapely.geometry import LineString
+import os
+
+# %%
 
 
 class GpxParser:
@@ -55,9 +59,41 @@ class GpxParser:
         return self.df
 
     def get_speed(self):
+        """If timestamp is available then use it to calculate speed."""
         for i in range(0, len(self.data) - 1):
             self.data.iloc[i + 1, 5] = (
                 3600
                 * self.data.iloc[i + 1, 4]
                 / (self.data.iloc[i + 1, 3] - self.data.iloc[i, 3]).seconds
             )
+
+    def convert_to_linestring(self):
+        """Convert the pandas df to linestring."""
+        return LineString(
+            geopandas.points_from_xy(
+                x=self.data.longitude, y=self.data.latitude
+            )
+        )
+
+    def visualize_route(
+        self,
+        mapbox_api_key=None,
+        output_map=os.getcwd() + "/_mymap",
+        open_browser=False,
+        read_only=False,
+        config_file=None,
+    ):
+        """Visualize the GPX route with kepler_cli"""
+        gpx_visualize = Visualize(
+            api_key=mapbox_api_key,
+            config_file=config_file,
+            output_map=output_map,
+        )
+
+        gpx_visualize.add_data(data=self.data, names="point data")
+        route_osm = self.convert_to_linestring()
+        gpx_visualize.add_data(data=route_osm, names="line string")
+        html_path = gpx_visualize.render(
+            open_browser=open_browser, read_only=read_only
+        )
+        return html_path
