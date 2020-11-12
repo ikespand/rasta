@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 This example show the usage with a recorded track from mobile. It has the
 timestamp information. So, we can also find the speed.

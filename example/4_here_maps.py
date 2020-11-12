@@ -1,11 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-Copyright (C) 2020 Kratrim Labs - All Rights Reserved
-
 This script usage the HERE MAPS API to determine the fastest public transit
 route. Further, we use data from any custom 3rd party BIKE_STATION and with
 some more post processing we recommend an optimum path.
 
-This will act as rest api which will return geojson data for available options.
+This can act as rest api which will return geojson data for available options.
 
 """
 

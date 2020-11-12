@@ -44,9 +44,9 @@ Ready to contribute? Here's how to set up `rasta` for local development.
 
     $ git clone git@github.com:your_name_here/rasta.git
 
-3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
+3. Install your local copy into a virtualenv. Assuming you have conda installed, this is how you set up your fork for local development::
 
-    $ mkvirtualenv rasta
+    $ conda create -n rasta_dev python=3.8
     $ cd rasta
     $ python setup.py develop
 

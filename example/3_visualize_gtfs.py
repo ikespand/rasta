@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Process and visualize GTFS feed with the help of `gtfs` module in `rasta`.
 

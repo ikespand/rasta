@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Example to demonstrate the usage of Gpx class in rasta which doesn't have the
 timestamp.
