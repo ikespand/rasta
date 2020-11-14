@@ -1,0 +1,8 @@
+settings.py
+.DS_Store
+*.html
+__pycache__
+api
+*.csv
+*.json
+tbd.py
