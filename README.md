@@ -1,11 +1,9 @@
 # rasta
 [![](https://raw.githubusercontent.com/ikespand/rasta/master/docs/Rasta_logo.png)](rasta_logo)
 
-![PyTest](https://github.com/ikespand/rasta/workflows/PyTest/badge.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PyTest](https://github.com/ikespand/rasta/workflows/PyTest/badge.svg)](https://github.com/ikespand/rasta/actions?query=workflow%3APyTest) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![Python 3.6+](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
-[![Python 3.7+](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
+[![Python 3.6+](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/) [![Python 3.7+](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/) [![Python 3.8+](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
 
 Rasta (rāstā) is a Python based library specifically design to handle geospatial data especially in the context of navigation. Currently, one can use rasta to parse/process/visualize GPX, GTFS, GEOJSON data. In addition, there are modules to use REST API from HERE and OpenTripPlanner for the navigation. 
 
@@ -79,4 +77,4 @@ pip install git+https://github.com/ikespand/keplergl_cli
 - Extend documentation
 
 **Developed at:**
-![KLabs_logo](https://raw.githubusercontent.com/ikespand/rasta/master/docs/KLabs_logo.JPG "KLabs_logo")
+![KLabs_logo](https://raw.githubusercontent.com/ikespand/rasta/master/docs/KLabs_logo.JPG)
