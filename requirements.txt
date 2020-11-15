@@ -6,4 +6,6 @@ numpy>=1.19.1
 requests>=2.24.0
 polyline==1.4.0
 keplergl==0.2.0
-keplergl-cli @ https://github.com/ikespand/keplergl_cli/archive/v0.3.2.tar.gz
+#keplergl-cli @ git://github.com/ikespand/keplergl_cli/archive/v0.3.2.tar.gz
+-e git://github.com/ikespand/keplergl_cli.git#egg=keplergl_cli
+
