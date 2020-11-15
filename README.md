@@ -19,11 +19,16 @@ Directly install from PyPI:
 ```
 pip install rasta
 ```
+As a forked version of a dependecy is being used, please install it separately as follow:
+```
+pip install git+https://github.com/ikespand/keplergl_cli
+```
 Alternatively, clone this repo and install:
 ```
 git clone https://github.com/ikespand/rasta.git
 cd rasta
 python setup.py install
+pip install git+https://github.com/ikespand/keplergl_cli
 ```
 
 To visualize data with the kepler.gl, user needs to have Mapbox API key which provides the tiles. Go to [Mapbox.com](https://account.mapbox.com/access-tokens) to get an API key.
