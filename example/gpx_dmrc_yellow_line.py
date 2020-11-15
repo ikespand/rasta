@@ -20,7 +20,7 @@ map_location = gpx_instance.visualize_route(
     MAPBOX_API_KEY=MAPBOX_API_KEY,
     output_map=os.getcwd() + "/_dmrc",
     open_browser=True,
-    config_file="keplergl_config.json"
+    config_file="keplergl_config.json",
 )
 
 # Further calculations
