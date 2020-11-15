@@ -4,8 +4,7 @@
 """
 
 from setuptools import find_packages, setup
-
-# from pip._internal import main as pipmain
+from pip._internal import main as pipmain
 
 with open("README.md") as f:
     readme = f.read()
@@ -20,12 +19,12 @@ setup_requirements = ["setuptools >= 38.6.0", "twine >= 1.11.0"]
 
 # keplergl-cli on PyPi is not updated with my latest changes, so installing
 # from GitHub -> Not working with PyPi
-# pipmain(
-#    [
-#        "install",
-#        "https://github.com/ikespand/keplergl_cli/archive/v0.3.2.tar.gz",
-#    ]
-# )
+pipmain(
+    [
+        "install",
+        "https://github.com/ikespand/keplergl_cli/archive/v0.3.2.tar.gz",
+    ]
+)
 
 setup(
     author="Sandeep Pandey",
