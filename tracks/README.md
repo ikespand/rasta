@@ -1,0 +1,2 @@
+## About the data
+This data is from public domain provided by respective authorities on their website. We don't own these data and these are provided as a sample. If you're the owner of any of the data and have any objection then please write to us and we can take it down.

@@ -13,6 +13,7 @@ from keplergl_cli.keplergl_cli import Visualize
 import polyline
 import datetime
 from shapely.geometry import LineString
+from time import localtime, strftime
 
 # %%
 
@@ -24,19 +25,41 @@ class GetOtpRoute:
         self,
         start_coord,
         end_coord,
-        mode="TRANSIT,WALK",
+        time=None,
+        date=None,
+        mode="TRANSIT",
         viz=True,
         MAPBOX_API_KEY=None,
         output_map_path="navigation_with_otp",
     ):
         self.src = start_coord
         self.tgt = end_coord
-        self.mode = mode
+        self.update_time_date(time, date)
+        self.update_mode(mode)
         self.base_address = "http://localhost:8080/otp/routers/default"
         self.get_routes()
         self.mapbox_api_key = MAPBOX_API_KEY
         self.output_map_path = output_map_path
         # self.extract_itinerary()
+
+    def update_time_date(self, time, date):
+        """Set the date and time. If no time is given then set it to current
+        time and date.
+        """
+        if time is None:
+            self.time = strftime("%H:%M:%S", localtime())
+        else:
+            self.time = time
+        if date is None:
+            self.date = strftime("%Y/%m/%d", localtime())
+        else:
+            self.date = date
+
+    def update_mode(self, mode):
+        """Set the travel model. OTP supports: Transit, Bus, Rail,
+        Airplane, Bicycle, Bicycle&Transit etc.
+        """
+        self.mode = mode
 
     def build_query(self):
         """Update the query"""
@@ -46,6 +69,10 @@ class GetOtpRoute:
             + self.src
             + "&toPlace="
             + self.tgt
+            + "&time="
+            + self.time
+            + "&date="
+            + self.date
             + "&mode="
             + self.mode
         )
@@ -66,15 +93,15 @@ class GetOtpRoute:
 
     def extract_itinerary(self):
         """Function to extract only the irineraries"""
-        vis = Visualize(
+        self.vis = Visualize(
             api_key=self.mapbox_api_key, output_map=self.output_map_path
         )
         gdf = []
         for i in range(0, len(self.response_json["plan"]["itineraries"])):
             itinerary = self.response_json["plan"]["itineraries"][i]
-            vis, df = GetOtpRoute.plot_itinerary(vis, itinerary, i)
+            self.vis, df = GetOtpRoute.plot_itinerary(self.vis, itinerary, i)
             gdf.append(df)
-        html_path = vis.render(open_browser=False, read_only=False)
+        html_path = self.vis.render(open_browser=False, read_only=False)
         return gdf, html_path
 
     @staticmethod

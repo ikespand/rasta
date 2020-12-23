@@ -8,15 +8,14 @@ Created on Thu Nov 12 16:13:21 2020
 
 # import sys
 # sys.path.append("..")
-from rasta.process_geo_data import ProcessGeoData
-import pytest
+from rasta.gpx import GpxParser
 
 
-def test_calculate_distance():
-    lat1, lon1 = 48.753435, 9.181379
-    lat2, lon2 = 48.748685, 9.186582
-    straigh_line_distance = ProcessGeoData.calculate_distance(
-        lat1, lon1, lat2, lon2
-    )
+def test_gpx():
+    """Tests the Gpx modele against a provided file in tracks"""
+    gpx_instance = GpxParser("./tracks/dmrc.gpx", calculate_distance=True)
 
-    assert round(straigh_line_distance, 2) == 0.65
+    total_dist = gpx_instance.data["distance"].sum()
+
+    assert isinstance(gpx_instance, GpxParser)
+    assert round(total_dist, 1) == 56.4
