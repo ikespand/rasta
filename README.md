@@ -1,7 +1,7 @@
 # rasta
 [![](https://raw.githubusercontent.com/ikespand/rasta/master/docs/Rasta_logo.png)](rasta_logo)
 
-[![PyTest](https://github.com/ikespand/rasta/workflows/PyTest/badge.svg)](https://github.com/ikespand/rasta/actions?query=workflow%3APyTest) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PyPI Latest Release](https://img.shields.io/pypi/v/rasta.svg)](https://pypi.org/project/rasta/) [![PyTest](https://github.com/ikespand/rasta/workflows/PyTest/badge.svg)](https://github.com/ikespand/rasta/actions?query=workflow%3APyTest) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 [![Python 3.6+](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/) [![Python 3.7+](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/) [![Python 3.8+](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
 
@@ -10,7 +10,7 @@ Rasta (rāstā) is a Python based library specifically design to handle geospati
 
 ## Features
 
--   Parse gpx file and convert them to pandas dataframe in a single line of code. Finally able to visualize the tracks with kepler.gl based interactive map.
+-   Parse GPX file and convert them to pandas dataframe in a single line of code. Finally able to visualize the tracks with kepler.gl based interactive map.
 - Parse GTFS feed and visualize the network.
 -  Navigate with HERE Maps or OpenTripPlanned by using their respective REST APIs.
 

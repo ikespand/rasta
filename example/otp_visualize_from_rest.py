@@ -7,20 +7,25 @@ of OpenTrip Planner (https://ikespand.github.io/posts/OpenTripPlanner/).
 @author: ikespand
 """
 # %%
-
-from settings import MAPBOX_API_KEY
+import os
 from rasta.navigate_with_otp import GetOtpRoute
 import pandas as pd
 import numpy as np
 
+# My mapbox api key is in environment variable
+MAPBOX_API_KEY = os.environ["MAPBOX_API_KEY"]
 # %%
 my_otp_nav = GetOtpRoute(
     start_coord="28.658420, 77.230757",
-    end_coord="28.544442, 77.206334",
+    end_coord="28.544442, 77.306334",
+    time="13:00:00",
+    date="2020/10/23",
     MAPBOX_API_KEY=MAPBOX_API_KEY,
     output_map_path="temporary_map_",
     viz=False,
+    mode="TRANSIT,WALK",
 )
+print("my_otp_nav.address", my_otp_nav.address)
 my_otp_nav.address
 gdf, html_path = my_otp_nav.extract_itinerary()
 
