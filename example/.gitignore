@@ -6,3 +6,4 @@ api
 *.csv
 *.json
 tbd.py
+.ipynb_checkpoints
