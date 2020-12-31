@@ -7,20 +7,22 @@ timestamp. Here, we're providing a custom JSON file to control kepler.gl
 @author: ikespand
 """
 import os
-from settings import MAPBOX_API_KEY
 from rasta.gpx import GpxParser
 
 # %% Main Program
+MAPBOX_API_KEY = os.environ["MAPBOX_API_KEY"]
+# MAPBOX_API_KEY = "MY_LONG_MAPBOX_API_KEY"
+
 # Load the gpx file
 gpx_instance = GpxParser("../tracks/dmrc.gpx", calculate_distance=True)
 # Extract the data
 df = gpx_instance.data
 # Visaulize the tracks
 map_location = gpx_instance.visualize_route(
-    MAPBOX_API_KEY=MAPBOX_API_KEY,
-    output_map=os.getcwd() + "/_dmrc",
-    open_browser=True,
-    config_file="keplergl_config.json",
+    MAPBOX_API_KEY=MAPBOX_API_KEY,  # Necessary for this function
+    output_map=os.getcwd() + "/dmrc",  # Optional
+    open_browser=True,  # Optional
+    config_file="keplergl_config_sample.json",  # Optional
 )
 
 # Further calculations

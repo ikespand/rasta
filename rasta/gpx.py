@@ -11,9 +11,10 @@ import pandas as pd
 import geopandas
 import numpy as np
 from rasta.process_geo_data import ProcessGeoData
-from keplergl_cli.keplergl_cli import Visualize
+
+# from keplergl_cli.keplergl_cli import Visualize
+from rasta.rasta_kepler import RastaKepler
 from shapely.geometry import LineString
-import os
 
 # %%
 
@@ -84,7 +85,7 @@ class GpxParser:
     def visualize_route(
         self,
         MAPBOX_API_KEY=None,
-        output_map=os.getcwd() + "/_mymap",
+        output_map=None,
         open_browser=False,
         read_only=False,
         config_file=None,
@@ -95,10 +96,11 @@ class GpxParser:
             self.data["time"] = self.data["time"].apply(str)
 
         # Use keplergl_cli
-        gpx_visualize = Visualize(
+        gpx_visualize = RastaKepler(
             api_key=MAPBOX_API_KEY,
             config_file=config_file,
             output_map=output_map,
+            style="Dark",
         )
 
         gpx_visualize.add_data(data=self.data, names="point data")

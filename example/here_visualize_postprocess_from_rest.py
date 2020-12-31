@@ -15,7 +15,9 @@ import geopandas as gpd
 import pandas as pd
 from shapely.geometry import Point, LineString
 from settings import HERE_API_KEY, MAPBOX_API_KEY
-from keplergl_cli.keplergl_cli import Visualize
+
+# from keplergl_cli.keplergl_cli import Visualize
+from rasta.rasta_kepler import RastaKepler
 from rasta.navigate_with_here import GetHereRoute
 from process_geo_data import ProcessGeoData
 import numpy as np
@@ -134,7 +136,7 @@ for i in range(0, len(gdf_123)):
 # gdf_123.to_file("output.json", driver="GeoJSON")
 # %% Visualize with Kepler
 
-vis = Visualize(
+vis = RastaKepler(
     api_key=MAPBOX_API_KEY,
     config_file="keplergl_config.json",
     output_map="Optimum_here",
