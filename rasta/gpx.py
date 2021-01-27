@@ -46,7 +46,9 @@ class GpxParser:
         """Function to read GPX file with gpxpy library and then postprocess
         the data.
         """
-        self.gpx_file = open(self.gpx_file_name, "r")
+        self.gpx_file = open(
+            self.gpx_file_name, mode="r", encoding="utf-8-sig"
+        )
         self.gpx = gpxpy.parse(self.gpx_file)
         # Extract the data
         self.data = self.gpx.tracks[0].segments[0].points
