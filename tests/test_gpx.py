@@ -4,14 +4,16 @@ Spyder Editor
 
 This is a temporary script file.
 """
-from rasta.process_geo_data import ProcessGeoData
+from rasta.gpx import GpxParser
+from rasta.rasta_kepler import RastaKepler
+import os
 
 
-def test_calculate_distance():
-    lat1, lon1 = 48.753435, 9.181379
-    lat2, lon2 = 48.748685, 9.186582
-    straigh_line_distance = ProcessGeoData.calculate_distance(
-        lat1, lon1, lat2, lon2
-    )
-
-    assert round(straigh_line_distance, 2) == 0.65
+def test_gpx():
+    gpx_instance = GpxParser("./tracks/dmrc.gpx", calculate_distance=False)
+    html_path, vis = gpx_instance.visualize_route(open_browser=False,
+                                                  MAPBOX_API_KEY="DummyKey")
+    assert isinstance(gpx_instance, GpxParser)
+    assert len(gpx_instance.data) == 425
+    assert isinstance(vis, RastaKepler)
+    assert os.path.splitext(html_path)[1] == ".html"

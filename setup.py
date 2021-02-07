@@ -17,14 +17,6 @@ with open("requirements.txt") as requirements_file:
 
 setup_requirements = ["setuptools >= 38.6.0", "twine >= 1.11.0"]
 
-# keplergl-cli on PyPi is not updated with my latest changes, so installing
-# from GitHub -> Not working with PyPi
-pipmain(
-    [
-        "install",
-        "https://github.com/ikespand/keplergl_cli/archive/v0.3.2.tar.gz",
-    ]
-)
 
 setup(
     author="Sandeep Pandey",

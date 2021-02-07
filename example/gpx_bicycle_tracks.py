@@ -9,11 +9,9 @@ timestamp information. So, we can also find the speed.
 import os
 from rasta.gpx import GpxParser
 
-# Following just holds the MAPBOX_API_KEY. You can paste it here directly or
-# can paste it into your bashrc file and import it from there.
-from settings import MAPBOX_API_KEY
-
 # %%
+MAPBOX_API_KEY = os.environ["MAPBOX_API_KEY"]
+# MAPBOX_API_KEY = "MY_LONG_MAPBOX_API_KEY"
 # Load the gpx file
 gpx_fname = "../tracks/BicyleRoute.gpx"
 

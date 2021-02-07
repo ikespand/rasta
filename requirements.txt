@@ -1,3 +1,4 @@
+click==7.1.2
 gpxpy>=1.4.1
 pandas>=1.1.1
 geopandas>=0.6.0
@@ -6,6 +7,4 @@ numpy>=1.19.1
 requests>=2.24.0
 polyline==1.4.0
 keplergl==0.2.0
-#keplergl_cli@git://github.com/ikespand/keplergl_cli.git#egg=keplergl_cli=0.3.2
-#-e git://github.com/ikespand/keplergl_cli.git#egg=keplergl_cli
-
+keplergl_cli

@@ -9,7 +9,9 @@ consuming its data.
 import geopandas as gpd
 import pandas as pd
 import requests
-from keplergl_cli.keplergl_cli import Visualize
+
+# from keplergl_cli.keplergl_cli import Visualize
+from rasta.rasta_kepler import RastaKepler
 import polyline
 import datetime
 from shapely.geometry import LineString
@@ -93,7 +95,7 @@ class GetOtpRoute:
 
     def extract_itinerary(self):
         """Function to extract only the irineraries"""
-        self.vis = Visualize(
+        self.vis = RastaKepler(
             api_key=self.mapbox_api_key, output_map=self.output_map_path
         )
         gdf = []

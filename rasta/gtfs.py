@@ -7,7 +7,9 @@ Module to parse/process/visualize/export GTFS feed.
 """
 import pandas as pd
 import zipfile
-from keplergl_cli.keplergl_cli import Visualize
+
+# from keplergl_cli.keplergl_cli import Visualize
+from rasta.rasta_kepler import RastaKepler
 from shapely.geometry import Point, LineString
 import geopandas as gpd
 
@@ -66,7 +68,7 @@ class Gtfs:
         """Static function which simply usage keplergl_cli to add the data
         to the map.
         """
-        vis = Visualize(api_key=MAPBOX_API_KEY, output_map=output_map)
+        vis = RastaKepler(api_key=MAPBOX_API_KEY, output_map=output_map)
         for key in data:
             vis.add_data(data=data[key], names=key)
         html_path = vis.render(open_browser=False, read_only=False)
