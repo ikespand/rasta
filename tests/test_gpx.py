@@ -11,7 +11,8 @@ import os
 
 def test_gpx():
     gpx_instance = GpxParser("./tracks/dmrc.gpx", calculate_distance=False)
-    html_path, vis = gpx_instance.visualize_route()
+    html_path, vis = gpx_instance.visualize_route(open_browser=False,
+                                                  MAPBOX_API_KEY="DummyKey")
     assert isinstance(gpx_instance, GpxParser)
     assert len(gpx_instance.data) == 425
     assert isinstance(vis, RastaKepler)
