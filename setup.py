@@ -4,9 +4,8 @@
 """
 
 from setuptools import find_packages, setup
-from pip._internal import main as pipmain
 
-with open("README.md") as f:
+with open("README.md", encoding='utf8') as f:
     readme = f.read()
 
 
