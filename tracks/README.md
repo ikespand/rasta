@@ -1,2 +1,2 @@
 ## About the data
-This data is from public domain provided by respective authorities on their website. We don't own these data and these are provided here as a sample only. If you're the owner of any of the dataset available here and have any objection then please write to us and we can take it down.
+Some of the data here are from public domain provided by respective authorities on their website. We don't own these data and these are provided here as a sample only. If you're the owner of any of the dataset available here and have any objection then please write to us and we can take it down.
