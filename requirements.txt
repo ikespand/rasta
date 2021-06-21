@@ -8,3 +8,4 @@ requests>=2.24.0
 polyline==1.4.0
 keplergl==0.2.0
 keplergl_cli
+tabulate

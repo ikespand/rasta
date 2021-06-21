@@ -5,7 +5,7 @@
 
 from setuptools import find_packages, setup
 
-with open("README.md", encoding='utf8') as f:
+with open("README.md", encoding="utf8") as f:
     readme = f.read()
 
 
@@ -38,6 +38,6 @@ setup(
     setup_requires=setup_requirements,
     test_suite="tests",
     url="https://github.com/ikespand/rasta",
-    version="0.0.3",
+    version="0.1.0",
     zip_safe=False,
 )
