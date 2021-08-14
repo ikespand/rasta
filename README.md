@@ -1,12 +1,15 @@
-# rasta
+<p align="center">
+  <img width="200" src="https://raw.githubusercontent.com/ikespand/rasta/master/docs/Rasta_logo.png" alt="rasta">
+</p>
+
 <p align="center">
 [![PyPI Latest Release](https://img.shields.io/pypi/v/rasta.svg)](https://pypi.org/project/rasta/) [![PyTest](https://github.com/ikespand/rasta/workflows/PyTest/badge.svg)](https://github.com/ikespand/rasta/actions?query=workflow%3APyTest) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Downloads](https://pepy.tech/badge/rasta)](https://pepy.tech/project/rasta)
 [![Python 3.6+](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/) [![Python 3.7+](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/) [![Python 3.8+](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
+[![Downloads](https://pepy.tech/badge/rasta)](https://pepy.tech/project/rasta) [![GitHub stars](https://img.shields.io/github/stars/ikespand/rasta)](https://github.com/ikespand/rasta)
 </p>
-[![](https://raw.githubusercontent.com/ikespand/rasta/master/docs/Rasta_logo.png)](rasta_logo)
 
-Rasta (rāstā) is a Python based library specifically design to handle geospatial data especially in the context of navigation. Currently, one can use rasta to parse/process/visualize GPX, GTFS, GEOJSON data. In addition, there are modules to use REST API from HERE and OpenTripPlanner for the navigation. 
+# rasta
+Rasta (rāstā) is a python based library specifically designed to handle geospatial data especially in the context of navigation. Currently, one can use rasta to parse/process/visualize GPX, GTFS, GEOJSON data. In addition, there are modules to use REST API from HERE and OpenTripPlanner for the navigation. 
 
 
 ## Features
@@ -43,6 +46,25 @@ df = gpx_instance.data
 # Visaulize the tracks (You will need Mapbox API key for this step)
 html_path, vis = gpx_instance.visualize_route(MAPBOX_API_KEY=MAPBOX_API_KEY,open_browser=True)
 ```
+### Using data from SensorLogger
+```python
+from rasta.sensor_logger import SensorLogger
+# Pass the zip file from SensorLogger
+my_sensors = SensorLogger(
+    zip_file=r"../tracks/2020-11-09_08-17-16.zip",
+    sync_with="Location",
+    read_sensors=["Magnetometer", "Location"],
+)
+# Get unsynched, raw data as dataframe
+raw_sensor_dict = my_sensors.sensor_df
+# Print metadata about device
+my_sensors.print_metadata()
+# Get synched data as dataframe
+my_syched_df = my_sensors.synched
+# Visualize tracks in map (map witll be saved as an HTML)
+my_sensors.save_to_kepler(MAPBOX_API_KEY)
+```
+
 ### Using GTFS feed
 Example [gtfs_sample_london.py ](https://github.com/ikespand/rasta/blob/master/example/gtfs_sample_london.py "gtfs_sample_london.py ")is to have the visalization of GTFS feed from a given zip file. For a generic GTFS feed:
 ```python
@@ -75,4 +97,6 @@ gdf, html_path = my_otp_nav.extract_itinerary()
 - Extend documentation
 
 **Developed at:**
-![KLabs_logo](https://raw.githubusercontent.com/ikespand/rasta/master/docs/KLabs_logo.JPG)
+<p align="center">
+  <img width="200" src="https://raw.githubusercontent.com/ikespand/rasta/master/docs/KLabs_logo.JPG" alt="rasta">
+</p>

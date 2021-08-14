@@ -5,12 +5,11 @@ Created on Tue Dec  8 21:39:16 2020
 
 @author: ikespand
 """
-
+import sys
+sys.path.append(r'C:\Users\PC\Desktop\rasta')  # TODO: REMOVE THIS
 import pandas as pd
 from rasta.rasta_kepler import RastaKepler
-import geopandas as gpd
 import zipfile
-import sys
 
 # %%
 
@@ -26,16 +25,10 @@ class SensorLogger:
     def __init__(
         self,
         zip_file: str,
-        read_location: bool = True,
-        read_accelerometer: bool = True,
-        read_orientation: bool = True,
         sync_with: str = "Location",
         read_sensors: list = [],
     ):
         self.zip_file = zip_file
-        self.read_location = read_location
-        self.read_accelerometer = read_accelerometer
-        self.read_orientation = read_orientation
         self.sync_with = sync_with
         self.read_sensors = read_sensors
         self.data_pipeline()
@@ -51,7 +44,6 @@ class SensorLogger:
         """
         self.read_zip()
         self.read_from_zip()
-        self.get_data_from_zip()
         self.sync_data()
 
     def read_zip(self):
@@ -90,7 +82,7 @@ class SensorLogger:
         else:
             print("Reading all available sensors")
             __readable_files = self.filelists
-        # Initialize an empty dictionary which will hold all the data.
+        # Initialize an empty dictionary which will hold all the data
         self.sensor_df = {}
         for filelist in __readable_files:
             sensor_name = filelist.split(".csv")[0]
@@ -134,66 +126,6 @@ class SensorLogger:
         print("Metadata of this recording is :")
         print(self.sensor_df["Metadata"].to_markdown())
 
-    def get_data_from_zip(self):
-        """
-        Function to read csv data from the zip file with pandas. For now, only
-        3 sensors are allowed to read viz. GPS, accelerometer abd gyroscope.
-        TODO: Remove it bcz `read_from_zip` is available from now on.
-
-        Returns
-        -------
-        None.
-
-        """
-        if self.read_location:
-            self.location = pd.read_csv(self.zf.open("Location.csv"))
-            self.location["Timestamp"] = pd.to_datetime(self.location["time"])
-
-        if self.read_accelerometer:
-            self.accelerometer = pd.read_csv(self.zf.open("Accelerometer.csv"))
-            self.accelerometer["Timestamp"] = pd.to_datetime(
-                self.accelerometer["time"]
-            )
-            self.accelerometer.rename(
-                columns={"x": "ac_x", "y": "ac_y", "z": "ac_z"}, inplace=True
-            )
-
-        if self.read_orientation:
-            self.gyroscope = pd.read_csv(self.zf.open("Orientation.csv"))
-            self.gyroscope["Timestamp"] = pd.to_datetime(
-                self.gyroscope["time"]
-            )
-            self.gyroscope.rename(
-                columns={"x": "gy_x", "y": "gy_y", "z": "gy_z"}, inplace=True
-            )
-
-    # def sync_data(self):
-    #     """
-    #     As the frequency of data capture varies among all sensor, therefore,
-    #     this module is to synchronize data to a common timestamp.
-    #     TODO: Allow sync with other sensors.
-
-    #     Returns
-    #     -------
-    #     None.
-
-    #     """
-    #     if self.sync_with == "location":
-    #         if self.read_accelerometer:
-    #             self.location = SensorLogger.sync_sensors(
-    #                 self.location, self.accelerometer
-    #             )
-    #             self.location = self.location.drop(
-    #                 ["time_x", "time_y"], axis=1
-    #             )
-
-    #         if self.read_orientation:
-    #             self.location = SensorLogger.sync_sensors(
-    #                 self.location, self.gyroscope
-    #             )
-    #     else:
-    #         print("Sorry! Other methods are not implemented yet.")
-
     def sync_data(self):
         """
         As the frequency of data capture varies among all sensor, therefore,
@@ -223,7 +155,7 @@ class SensorLogger:
                     self.synched, self.sensor_df[sensor]
                 )
         else:
-            print("Only sync_with 'Location' is allowed for now!")
+            print("Only `sync_with` `Location` is allowed for now!")
             sys.exit()
 
     @staticmethod
@@ -288,41 +220,31 @@ class SensorLogger:
         if output_map is None:
             output_map = self.zip_file.replace(".zip", "-")
         # Kepler.gl needs Timestamp as string only!
-        self.synched["Timestamp"] = self.location["Timestamp"].apply(str)
-        gdf = gpd.GeoDataFrame(
-            self.synched,
-            geometry=gpd.points_from_xy(
-                self.location.longitude, self.location.latitude
-            ),
-        )
-        # Visuliaze with rasta.kepler
+        self.synched["Timestamp"] = self.synched["Timestamp"].apply(str)
         vis = RastaKepler(
             api_key=MAPBOX_API_KEY,
             output_map=self.zip_file.replace(".zip", ""),
         )
-        vis.add_data(data=gdf, names="Sync data")
+        vis.add_data(data=self.synched, names="Sync data")
         vis.render(open_browser=False)
-
 
 # %%
 if __name__ == "__main__":
     import os
-
-    # import matplotlib.pyplot as plt
-
     # Get MAPBOX API key from environment variable
     MAPBOX_API_KEY = os.environ["MAPBOX_API_KEY"]
     # Instantiate our class with a sample log file from tracks
     my_sensors = SensorLogger(
         zip_file=r"../tracks/2020-11-09_08-17-16.zip",
-        sync_with="Location",
+        sync_with="Magnetometer",
         # read_sensors=["Magnetometer", "Location"],
     )
-    raw_sensor_dict = my_sensors.sensor_df
     my_sensors.print_metadata()
+    raw_sensor_dict = my_sensors.sensor_df
     my_syched_df = my_sensors.synched
     # # Visualize tracks in map (map witll be saved as an HTML)
     my_sensors.save_to_kepler(MAPBOX_API_KEY)
+    # import matplotlib.pyplot as plt
     # plt.plot(data["ac_x"])
     # plt.plot(data["ac_y"])
     # plt.plot(data["ac_z"])
