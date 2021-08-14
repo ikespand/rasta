@@ -2,15 +2,10 @@
   <img width="200" src="https://raw.githubusercontent.com/ikespand/rasta/master/docs/Rasta_logo.png" alt="rasta">
 </p>
 
-<p align="center">
 [![PyPI Latest Release](https://img.shields.io/pypi/v/rasta.svg)](https://pypi.org/project/rasta/) [![PyTest](https://github.com/ikespand/rasta/workflows/PyTest/badge.svg)](https://github.com/ikespand/rasta/actions?query=workflow%3APyTest) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-</p>
-<p align="center">
 [![Python 3.6+](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/) [![Python 3.7+](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/) [![Python 3.8+](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
-</p>
-<p align="center">
-  [![Downloads](https://pepy.tech/badge/rasta)](https://pepy.tech/project/rasta) [![GitHub stars](https://img.shields.io/github/stars/ikespand/rasta)](https://github.com/ikespand/rasta)
-</p>
+[![Downloads](https://pepy.tech/badge/rasta)](https://pepy.tech/project/rasta) [![GitHub stars](https://img.shields.io/github/stars/ikespand/rasta)](https://github.com/ikespand/rasta)
+
 
 # rasta
 Rasta (rāstā) is a python based library specifically designed to handle geospatial data especially in the context of navigation. Currently, one can use rasta to parse/process/visualize GPX, GTFS, GEOJSON data. In addition, there are modules to use REST API from HERE and OpenTripPlanner for the navigation. 
