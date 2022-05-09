@@ -33,6 +33,7 @@ class GetOtpRoute:
         viz=True,
         MAPBOX_API_KEY=None,
         output_map_path="navigation_with_otp",
+        proxies = {"http": None, "https": None},
     ):
         self.src = start_coord
         self.tgt = end_coord
@@ -42,6 +43,7 @@ class GetOtpRoute:
         self.get_routes()
         self.mapbox_api_key = MAPBOX_API_KEY
         self.output_map_path = output_map_path
+        self.proxies = proxies
         # self.extract_itinerary()
 
     def update_time_date(self, time, date):
@@ -83,7 +85,7 @@ class GetOtpRoute:
         """From the built query, inquire the api of otp"""
         self.build_query()
         self.response = requests.get(
-            self.address, headers={"Accept-type": "application/json"}
+            self.address, headers={"Accept-type": "application/json"}, proxies= self.proxies
         )
 
         if self.response.status_code == 200:
