@@ -38,6 +38,6 @@ setup(
     setup_requires=setup_requirements,
     test_suite="tests",
     url="https://github.com/ikespand/rasta",
-    version="0.0.3",
+    version="0.0.4",
     zip_safe=False,
 )
