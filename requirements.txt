@@ -6,6 +6,6 @@ shapely>=1.6.4
 numpy>=1.19.1
 requests>=2.24.0
 polyline==1.4.0
-nbconvert==6.5.0
+nbconvert==6.5.1
 keplergl==0.2.0
 keplergl_cli
