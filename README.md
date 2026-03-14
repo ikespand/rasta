@@ -1,4 +1,9 @@
 # rasta
+> ⚠️ **This repository is archived and no longer maintained.**
+>  
+> The project is kept for historical/reference purposes only.  
+> Issues and pull requests are no longer monitored or accepted.
+> 
 [![PyPI Latest Release](https://img.shields.io/pypi/v/rasta.svg)](https://pypi.org/project/rasta/) [![PyTest](https://github.com/ikespand/rasta/workflows/PyTest/badge.svg)](https://github.com/ikespand/rasta/actions?query=workflow%3APyTest) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 [![Python 3.6+](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/) [![Python 3.7+](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/) [![Python 3.8+](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
